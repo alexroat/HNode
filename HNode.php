@@ -18,6 +18,14 @@ class HNode {
             $this->sub=  array_slice($a, 2);
     }
 
+    
+    public function __callStatic($name, $arguments) {
+        $reflect  = new ReflectionClass(get_called_class());
+        array_unshift($arguments,$name);
+        return $reflect->newInstanceArgs($arguments);
+    }
+    
+
     public function __toString() {
         $r = "<" . $this->tag;
         foreach ($this->attr as $k => $v)
