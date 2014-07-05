@@ -19,7 +19,7 @@ class HNode {
     }
 
     
-    public function __callStatic($name, $arguments) {
+    public static function __callStatic($name, $arguments) {
         $reflect  = new ReflectionClass(get_called_class());
         array_unshift($arguments,$name);
         return $reflect->newInstanceArgs($arguments);
