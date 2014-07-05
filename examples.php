@@ -70,3 +70,9 @@ MyBox::create("John","Doe")->go();
 //<span>Surname : Doe</span>
 //</div>
 
+
+
+
+//you can directly create any kind of element calling like a static method (PHP 5.3 required)
+echo HNode::span(null,"hello");
+//<span>hello</span>
