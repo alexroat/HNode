@@ -7,6 +7,7 @@ A PHP class to build HTML/XML snipets with chain syntax (like JQuery) in order t
 
 
 it better works with PHP>=5.3
+
 constructor syntax is: 
 
 ```php
