@@ -1,3 +1,4 @@
+<?php
 class HN {
 
     public $attr = array();
