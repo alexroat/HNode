@@ -11,7 +11,7 @@ it better works with PHP>=5.3
 constructor syntax is: 
 
 ```php
-new HNode([tagname:string], [attributes:kv-array], [child], [child], [child],...)
+new HNode([tagname:string], [child], [child], [child],...)
 ```
 
 create a div with a text
@@ -23,21 +23,30 @@ echo $div->add("hello");//add() allows you to add other children nodes or text
 
 alternatively:
 ```php
-$div=new HNode(null,null,"hello");
+$div=new HNode(null,"hello");
 echo $div;
+//<div>hello</div>
+```
+
+or adding child later:
+```php
+$div=new HN();
+echo $div->add("hello");
 //<div>hello</div>
 ```
 
 create a span with attributes 
 ```php
-$div=new HNode("span",array("id"=>"test","class"=>"testclass"),"hey");
+$div=new HN("span","hey");
+$div->attr(array("id"=>"test","class"=>"testclass"));
 echo $div;
 //<span id="test" class="testclass">hey</span>
 ```
 
 create a div with attributes with two children span
 ```php
-$div=new HNode("div",array("id"=>"test","class"=>"testclass"),new HNode("span",null,"hello"),new HNode("span",null,"world"));
+$div=new HN("div",new HN("span","hello"),new HN("span","world"));
+$div->attr(array("id"=>"test","class"=>"testclass"));
 echo $div;
 //<div id="test" class="testclass">
 //<span>hello</span>
@@ -47,7 +56,7 @@ echo $div;
 
 equivalent with fast syntax with ::create static function
 ```php
-echo HNode::create("div",array("id"=>"test","class"=>"testclass"), HNode::create("span",null,"hello"),HNode::create("span",null,"world"));
+echo HN::create("div", HN::create("span","hello"),HN::create("span","world"))->attr(array("id"=>"test","class"=>"testclass"));
 //<div id="test" class="testclass">
 //<span>hello</span>
 //<span>world</span>
@@ -56,7 +65,7 @@ echo HNode::create("div",array("id"=>"test","class"=>"testclass"), HNode::create
 
 //you can print directly with go()
 ```php
-HNode::create("div",array("id"=>"test","class"=>"testclass"), HNode::create("span",null,"hello"),HNode::create("span",null,"world"))->go();
+HN::create("div",HN::create("span","hello"),HN::create("span","world"))->attr(array("id"=>"test","class"=>"testclass"))->go();
 //<div id="test" class="testclass">
 //<span>hello</span>
 //<span>world</span>
@@ -69,8 +78,8 @@ class MyBox extends HNode
 {
     public function __construct($name,$surname) {
         parent::__construct("div");
-        $this->add(HNode::create("span",null,"Name : ".$name));
-        $this->add(HNode::create("span",null,"Surname : ".$surname));
+        $this->add(HNode::create("span","Name : ".$name));
+        $this->add(HNode::create("span","Surname : ".$surname));
     }
 }
 ```
@@ -97,10 +106,23 @@ MyBox::create("John","Doe")->go();
 
 you can directly create any kind of element calling like a static method (PHP 5.3 required)
 ```php
-HNode::div(array("id"=>"test","class"=>"testclass"), HNode::span(null,"hello"),HNode::span(null,"world"))->go();
+HNode::div(array("id"=>"test","class"=>"testclass"), HNode::span("hello"),HNode::span("world"))->go();
 //<div id="test" class="testclass">
 //<span>hello</span>
 //<span>world</span>
 //</div>
+```
 
+
+
+you can set also attributes directly using reflection (PHP 5.3 required)
+```php
+$div=HN::div(HN::span("hello"),HN::span("world"));
+$div->id="test";
+$div->class="testclass";
+$div->go();
+//<div id="test" class="testclass">
+//<span>hello</span>
+//<span>world</span>
+//</div>
 ```

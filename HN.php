@@ -12,9 +12,7 @@ class HN {
         if ($n>0)
             $this->tag = $a[0]?:"div";
         if ($n>1)
-            $this->add($a[1]);
-        if ($n>2)
-            $this->attr = $a[2]?:array();
+            $this->sub=  array_merge($this->sub,array_slice ($a,1));
     }
 
     
@@ -44,6 +42,11 @@ class HN {
                 return $this->attr;
                 break;
             case 1:
+                if (is_array($a[0]))
+                {
+                    array_merge($this->attr,$a[0]);
+                    return $this;
+                }   
                 return $this->attr[$a[0]];
                 break;
             default :
