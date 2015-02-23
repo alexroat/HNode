@@ -11,19 +11,19 @@ it better works with PHP>=5.3
 constructor syntax is: 
 
 ```php
-new HNode([tagname:string], [child], [child], [child],...)
+new HN([tagname:string], [child], [child], [child],...)
 ```
 
 create a div with a text
 ```php
-new HNode();//default tag is a div
+new HN();//default tag is a div
 echo $div->add("hello");//add() allows you to add other children nodes or text
 //<div>hello</div>
 ```
 
 alternatively:
 ```php
-$div=new HNode(null,"hello");
+$div=new HN(null,"hello");
 echo $div;
 //<div>hello</div>
 ```
@@ -72,14 +72,14 @@ HN::create("div",HN::create("span","hello"),HN::create("span","world"))->attr(ar
 //</div>
 ```
 
-OOP with HNODE: you can extend it in order to create your components
+OOP with HNode: you can extend it in order to create your components
 ```php
-class MyBox extends HNode
+class MyBox extends HN
 {
     public function __construct($name,$surname) {
         parent::__construct("div");
-        $this->add(HNode::create("span","Name : ".$name));
-        $this->add(HNode::create("span","Surname : ".$surname));
+        $this->add(HN::create("span","Name : ".$name));
+        $this->add(HN::create("span","Surname : ".$surname));
     }
 }
 ```
