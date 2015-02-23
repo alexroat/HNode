@@ -63,7 +63,7 @@ echo HN::create("div", HN::create("span","hello"),HN::create("span","world"))->a
 //</div>
 ```
 
-//you can print directly with go()
+you can print directly with go()
 ```php
 HN::create("div",HN::create("span","hello"),HN::create("span","world"))->attr(array("id"=>"test","class"=>"testclass"))->go();
 //<div id="test" class="testclass">
@@ -106,7 +106,7 @@ MyBox::create("John","Doe")->go();
 
 you can directly create any kind of element calling like a static method (PHP 5.3 required)
 ```php
-HNode::div(array("id"=>"test","class"=>"testclass"), HNode::span("hello"),HNode::span("world"))->go();
+HN::div(HN::span("hello"),HN::span("world"))->attr(array("id"=>"test","class"=>"testclass"))->go();
 //<div id="test" class="testclass">
 //<span>hello</span>
 //<span>world</span>
