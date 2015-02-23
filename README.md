@@ -16,7 +16,7 @@ new HN([tagname:string], [child], [child], [child],...)
 
 create a div with a text
 ```php
-new HN();//default tag is a div
+$div=new HN();//default tag is a div
 echo $div->add("hello");//add() allows you to add other children nodes or text
 //<div>hello</div>
 ```
